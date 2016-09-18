@@ -66,6 +66,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jLabel1.setText("Word");
 
+        tfieldWord.setFont(new java.awt.Font("Iskoola Pota", 0, 11)); // NOI18N
         tfieldWord.setToolTipText("Type your word here");
 
         btnClear.setText("Clear");
@@ -76,6 +77,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        Sentencetable.setFont(new java.awt.Font("Iskoola Pota", 0, 11)); // NOI18N
         Sentencetable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -155,8 +157,8 @@ public class MainFrame extends javax.swing.JFrame {
 //                }
                 //UIManager.setLookAndFeel("com.jtattoo.plaf.smart.SmartLookAndFeel");
                 //UIManager.setLookAndFeel("com.jtattoo.plaf.graphite.GraphiteLookAndFeel");
-                //UIManager.setLookAndFeel("com.jtattoo.plaf.aero.AeroLookAndFeel");
-                UIManager.setLookAndFeel("com.jtattoo.plaf.mcwin.McWinLookAndFeel");
+                UIManager.setLookAndFeel("com.jtattoo.plaf.aero.AeroLookAndFeel");
+                //UIManager.setLookAndFeel("com.jtattoo.plaf.mcwin.McWinLookAndFeel");
 
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
