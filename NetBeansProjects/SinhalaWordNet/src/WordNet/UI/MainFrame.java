@@ -1,18 +1,11 @@
 package WordNet.UI;
 
 import WordNet.Database.DBConnection;
-import java.awt.Toolkit;
-import java.awt.datatransfer.Clipboard;
-import java.awt.datatransfer.DataFlavor;
-import java.awt.datatransfer.UnsupportedFlavorException;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
@@ -30,12 +23,7 @@ public class MainFrame extends javax.swing.JFrame {
         initComponents();
     }
 
-    public void getFromClipBoard() throws UnsupportedFlavorException, IOException {
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Clipboard clipboard = toolkit.getSystemClipboard();
-        String result = (String) clipboard.getData(DataFlavor.stringFlavor);
-        System.out.println("String from Clipboard:" + result);
-    }
+ 
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -307,7 +295,6 @@ public class MainFrame extends javax.swing.JFrame {
                 new MainFrame().setVisible(true);
             }
         });
-        MainFrame frame = new MainFrame();
         
     }
 

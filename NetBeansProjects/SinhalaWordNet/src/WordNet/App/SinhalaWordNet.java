@@ -5,6 +5,7 @@
  */
 package WordNet.App;
 
+import Util.ClipBoardListener;
 import WorNet.Sample.ConnectWordsAndSentences;
 import WorNet.Sample.ReadModelSentences;
 import WorNet.Sample.ReadModelWords;
@@ -35,8 +36,10 @@ public class SinhalaWordNet {
 //        new ConnectWordsAndSentences().modelSearch();
         MainFrame f;
         f = new MainFrame();
+
+        ClipBoardListener clipBoardGrabber = new ClipBoardListener();
         try {
-            f.getFromClipBoard();
+            clipBoardGrabber.getFromClipBoard();
         } catch (UnsupportedFlavorException | IOException ex) {
             System.out.println(ex.getMessage());
         }
