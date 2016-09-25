@@ -25,7 +25,7 @@ public class SinhalaWordNet {
      */
     public static void main(String[] args) throws SQLException, IOException {
 //        new ReadList().read();
-//        new URLReader().readURL();
+        new URLReader().readURL();
 //        new ReadModelWords().read();
 //        new ReadModelSentences().read();
 //        new ConnectWordsAndSentences().searchSentence();
@@ -33,11 +33,11 @@ public class SinhalaWordNet {
 //        new ConnectWordsAndSentences().selectAllSentences();
 //        new WordandSentence().setDB();
 //        new ConnectWordsAndSentences().modelSearch();
-          MainFrame f;
-          f=new MainFrame();
-        
-          f.go();
-          //f.setVisible(true);
+//          MainFrame f;
+//          f=new MainFrame();
+//        
+//          f.go();
+//          //f.setVisible(true);
     }
     
 }

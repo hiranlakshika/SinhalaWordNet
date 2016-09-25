@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import org.jsoup.Jsoup;
 
 /**
  *
@@ -26,4 +27,7 @@ public class URLReader {
                 System.out.println(inputLine);
         }
     }
+    public static String html2text(String html) {
+    return Jsoup.parse(html).text();
+}
 }
