@@ -5,13 +5,17 @@
  */
 package WordNet.App;
 
+import Util.ClipBoardListener;
 import WorNet.Sample.ConnectWordsAndSentences;
 import WorNet.Sample.ReadModelSentences;
 import WorNet.Sample.ReadModelWords;
 import WorNet.Sample.WordandSentence;
 import WordNet.UI.MainFrame;
+import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -21,11 +25,11 @@ public class SinhalaWordNet {
 
     /**
      * @param args the command line arguments
-     * @throws java.sql.SQLException
      */
-    public static void main(String[] args) throws SQLException, IOException {
-//        new ReadList().read();
-        new URLReader().readURL();
+    public static void main(String[] args) {
+        try {
+            //        new ReadList().read();
+            new URLReader().readURL();
 //        new ReadModelWords().read();
 //        new ReadModelSentences().read();
 //        new ConnectWordsAndSentences().searchSentence();
@@ -33,11 +37,20 @@ public class SinhalaWordNet {
 //        new ConnectWordsAndSentences().selectAllSentences();
 //        new WordandSentence().setDB();
 //        new ConnectWordsAndSentences().modelSearch();
-//          MainFrame f;
-//          f=new MainFrame();
-//        
-//          f.go();
-//          //f.setVisible(true);
+//        MainFrame f;
+//        f = new MainFrame();
+//
+//        ClipBoardListener clipBoardGrabber = new ClipBoardListener();
+//        try {
+//            clipBoardGrabber.getFromClipBoard();
+//        } catch (UnsupportedFlavorException | IOException ex) {
+//            System.out.println(ex.getMessage());
+//        }
+//        f.go();
+//        //f.setVisible(true);
+        } catch (IOException ex) {
+            System.out.println("" + ex.getMessage());
+        }
     }
-    
+
 }

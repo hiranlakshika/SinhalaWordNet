@@ -17,17 +17,25 @@ import org.jsoup.Jsoup;
  * @author hiran
  */
 public class URLReader {
-    void readURL() throws MalformedURLException, IOException{
-        URL oracle = new URL("https://hirash.wordpress.com/");
+   
+    private String jSoup;
+
+    void readURL() throws MalformedURLException, IOException {
+        URL oracle = new URL("http://www.lankadeepa.lk/index.php/top_story/461117");
         try (BufferedReader in = new BufferedReader(
                 new InputStreamReader(
                         oracle.openStream()))) {
             String inputLine;
-            while ((inputLine = in.readLine()) != null)
-                System.out.println(inputLine);
+            while ((inputLine = in.readLine()) != null) {
+                jSoup=html2text(inputLine);
+                String resultString = jSoup.replaceAll("[a-zA-Z0-9]", "");
+                System.out.println(resultString);
+            }
         }
     }
+    
+
     public static String html2text(String html) {
-    return Jsoup.parse(html).text();
-}
+        return Jsoup.parse(html).text();
+    }
 }
