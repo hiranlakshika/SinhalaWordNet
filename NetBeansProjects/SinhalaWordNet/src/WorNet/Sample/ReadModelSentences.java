@@ -17,6 +17,11 @@ import java.sql.SQLException;
  * @author hiran
  */
 public class ReadModelSentences {
+
+    /**
+     *
+     * @throws SQLException
+     */
     public void read() throws SQLException {
 
         try {

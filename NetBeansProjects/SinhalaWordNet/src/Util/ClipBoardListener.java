@@ -22,6 +22,11 @@ public class ClipBoardListener extends Thread implements ClipboardOwner {
 
     Clipboard sysClip = Toolkit.getDefaultToolkit().getSystemClipboard();
 
+    /**
+     *
+     * @throws UnsupportedFlavorException
+     * @throws IOException
+     */
     public void getFromClipBoard() throws UnsupportedFlavorException, IOException {
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         Clipboard clipboard = toolkit.getSystemClipboard();
@@ -53,6 +58,10 @@ public class ClipBoardListener extends Thread implements ClipboardOwner {
         sysClip.setContents(t, this);
     }
 
+    /**
+     *
+     * @return
+     */
     public static String getClipboard() {
         Transferable t = Toolkit.getDefaultToolkit().getSystemClipboard().getContents(null);
 
@@ -68,11 +77,20 @@ public class ClipBoardListener extends Thread implements ClipboardOwner {
 
 // This method writes a string to the system clipboard.
 // otherwise it returns null.
+
+    /**
+     *
+     * @param str
+     */
     public static void setClipboard(String str) {
         StringSelection ss = new StringSelection(str);
         Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
     }
 
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         ClipBoardListener b = new ClipBoardListener();
         b.start();

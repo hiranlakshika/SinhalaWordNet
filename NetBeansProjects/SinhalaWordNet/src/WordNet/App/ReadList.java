@@ -18,6 +18,10 @@ import java.sql.SQLException;
  */
 public class ReadList {
 
+    /**
+     *
+     * @throws SQLException
+     */
     public void read() throws SQLException {
 
         try {

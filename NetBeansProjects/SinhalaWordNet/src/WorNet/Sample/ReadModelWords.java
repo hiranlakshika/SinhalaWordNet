@@ -22,6 +22,11 @@ import java.sql.SQLException;
  * This is a sample package
  */
 public class ReadModelWords {
+
+    /**
+     *
+     * @throws SQLException
+     */
     public void read() throws SQLException {
 
         try {

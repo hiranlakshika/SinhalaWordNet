@@ -65,6 +65,10 @@ public class ConnectWordsAndSentences {
 //			System.out.println(s+" "+index);
 //		}
 //    }
+
+    /**
+     *
+     */
     public void modelSearch() {
         String sql="Select * from Sentence";
         try {

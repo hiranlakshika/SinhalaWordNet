@@ -15,6 +15,10 @@ import java.sql.SQLException;
  * @author hiran
  */
 public class WordandSentence {
+
+    /**
+     *
+     */
     public void setDB(){
         int id = 0;
         while (id<=50) {

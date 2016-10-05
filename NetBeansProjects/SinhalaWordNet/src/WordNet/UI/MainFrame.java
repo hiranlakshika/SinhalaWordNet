@@ -150,6 +150,10 @@ public class MainFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    /**
+     *
+     */
     public void go() {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -181,6 +185,9 @@ public class MainFrame extends javax.swing.JFrame {
         });
     }
 
+    /**
+     *
+     */
     public void clear() {
         DefaultTableModel dm = (DefaultTableModel) Sentencetable.getModel();
         dm.getDataVector().removeAllElements();
