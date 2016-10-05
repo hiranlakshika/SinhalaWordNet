@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package WordNet.App;
 
 import java.io.BufferedReader;
@@ -28,7 +23,7 @@ public class URLReader {
             String inputLine;
             while ((inputLine = in.readLine()) != null) {
                 jSoup=html2text(inputLine);
-                String resultString = jSoup.replaceAll("[a-zA-Z0-9]", "");
+                String resultString = jSoup.replaceAll("[a-zA-Z0-9 \\[\\]$&+,\";<©>‘`^{_}.*#@?/=:'|\\\\()%!-]", "");
                 System.out.println(resultString);
             }
         }
