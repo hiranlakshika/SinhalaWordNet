@@ -33,14 +33,19 @@ public class URLReader {
                 String inputLine;
                 while ((inputLine = in.readLine()) != null) {
                     jSoup = html2text(inputLine);
-                    String resultString = jSoup.replaceAll("[a-zA-Z0-9\\[\\]$&+,\";<©>‘`^{_}.*#@?/=:'|\\\\()%!-]", "");
-                    System.out.println(resultString);
-                    fw.write(resultString);
+                    String resultString = jSoup.replaceAll("[a-zA-Z0-9\\[\\]$&+,\";<©>‘`^{_}*↑#@?/=:'|\\\\()%!-]", "");
+                    if (resultString.length() > 30) {
+                        if (resultString.contains(".")) {
+                            resultString += "\n";
+                            System.out.println(resultString);
+                            fw.write(resultString + "\n");
+                        }
+
+                    }
                 }
             }
 
         }
-
         fw.flush();
         fw.close();
     }

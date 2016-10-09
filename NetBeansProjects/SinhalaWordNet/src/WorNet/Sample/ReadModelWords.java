@@ -18,8 +18,7 @@ import java.sql.SQLException;
 
 /**
  *
- * @author hiran
- * This is a sample package
+ * @author hiran This is a sample package
  */
 public class ReadModelWords {
 

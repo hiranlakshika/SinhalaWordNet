@@ -77,7 +77,6 @@ public class ClipBoardListener extends Thread implements ClipboardOwner {
 
 // This method writes a string to the system clipboard.
 // otherwise it returns null.
-
     /**
      *
      * @param str

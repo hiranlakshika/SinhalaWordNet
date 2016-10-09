@@ -1,4 +1,3 @@
-
 package WorNet.Sample;
 
 import WordNet.Database.DBConnection;

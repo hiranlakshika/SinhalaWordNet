@@ -5,8 +5,6 @@ package WordNet.Database;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -21,8 +19,7 @@ public class DBConnection {
 
     /**
      *
-     * @return
-     * @throws ClassNotFoundException
+     * @return @throws ClassNotFoundException
      * @throws SQLException
      */
     public static Connection getConnection() throws ClassNotFoundException, SQLException {

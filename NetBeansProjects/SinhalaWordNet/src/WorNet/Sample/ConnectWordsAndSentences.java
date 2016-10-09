@@ -65,24 +65,23 @@ public class ConnectWordsAndSentences {
 //			System.out.println(s+" "+index);
 //		}
 //    }
-
     /**
      *
      */
     public void modelSearch() {
-        String sql="Select * from Sentence";
+        String sql = "Select * from Sentence";
         try {
             Connection connection = DBConnection.getConnection();
-            Statement stm=connection.createStatement();
+            Statement stm = connection.createStatement();
             ResultSet rst = stm.executeQuery(sql);
-            if(rst.next()){
+            if (rst.next()) {
                 System.out.println(rst.getString("text"));
                 System.out.println(rst.getInt("id"));
-            }else{
+            } else {
                 System.out.println("Not found");
             }
         } catch (SQLException | ClassNotFoundException ex) {
-            System.out.println(""+ex.getMessage());
+            System.out.println("" + ex.getMessage());
         }
 //        sql = "SELECT word_sentence.sentence_id\n"
 //                + "FROM word_sentence\n"
@@ -102,7 +101,7 @@ public class ConnectWordsAndSentences {
 //        } catch (SQLException | ClassNotFoundException ex) {
 //            System.out.println("" + ex.getMessage());
 //        }
-        
+
 //        sql = "SELECT word_sentence.sentence_id\n"
 //                + "FROM word_sentence\n"
 //                + "INNER JOIN baseword\n"

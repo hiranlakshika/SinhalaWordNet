@@ -29,7 +29,7 @@ public class SinhalaWordNet {
     public static void main(String[] args) {
         try {
             //        new ReadList().read();
-            new URLReader().readURL();
+            new URLManager().crawl("http://www.ada.lk");
 //        new ReadModelWords().read();
 //        new ReadModelSentences().read();
 //        new ConnectWordsAndSentences().searchSentence();
