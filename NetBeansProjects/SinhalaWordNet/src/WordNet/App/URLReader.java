@@ -24,22 +24,24 @@ public class URLReader {
     void readURL() throws MalformedURLException, IOException {
         fw = new FileWriter(file, true);
         URLManager uRLManager = new URLManager();
+        try {
+            uRLManager.addUrls();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
         urlList = uRLManager.getUrls();
         for (int i = 0; i < urlList.size(); i++) {
+            System.out.println("" + urlList.size());
             URL oracle = new URL(urlList.get(i));
             try (BufferedReader in = new BufferedReader(
-                    new InputStreamReader(
-                            oracle.openStream()))) {
+                    new InputStreamReader(oracle.openStream()))) {
                 String inputLine;
                 while ((inputLine = in.readLine()) != null) {
                     jSoup = html2text(inputLine);
                     String resultString = jSoup.replaceAll("[a-zA-Z0-9\\[\\]$&+,\";<©>‘`^{_}*↑#@?/=:'|\\\\()%!-]", "");
                     if (resultString.length() > 30) {
-                        if (resultString.contains(".")) {
-                            resultString += "\n";
-                            System.out.println(resultString);
-                            fw.write(resultString + "\n");
-                        }
+                        System.out.println(resultString);
+                        fw.write(resultString + "\n");
 
                     }
                 }
