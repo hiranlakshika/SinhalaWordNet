@@ -3,6 +3,7 @@ package WordNet.App;
 import Util.Patterns;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -12,12 +13,12 @@ import org.jsoup.select.Elements;
  *
  * @author hiran
  */
-public class URLManager {
+public class URLManager extends Thread {
 
     private ArrayList<String> mainUrls = new ArrayList<>();
-    private ArrayList<String> urls = new ArrayList<>();
+    private HashSet<String> urls = new HashSet<>();
 
-    public void crawl(String url) throws IOException {
+    public synchronized void crawl(String url) throws IOException {
 
         Document doc = Jsoup.connect(url).get();
         Elements links = doc.select("a");
@@ -65,7 +66,7 @@ public class URLManager {
     /**
      * @return the urls
      */
-    public ArrayList<String> getUrls() {
+    public HashSet<String> getUrls() {
 
         return urls;
     }
@@ -104,10 +105,22 @@ public class URLManager {
 
     }
 
-    void addUrls() throws IOException {
+    @Override
+    public void run() {
         addMainUrls();
         for (int i = 0; i < mainUrls.size(); i++) {
-            crawl(mainUrls.get(i));
+            try {
+                crawl(mainUrls.get(i));
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException ex) {
+                    System.out.println(ex.getMessage());
+                }
+
+            } catch (IOException ex) {
+                System.out.println(ex.getMessage());
+            }
+
         }
     }
 

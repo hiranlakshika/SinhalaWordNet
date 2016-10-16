@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
+import java.util.HashSet;
 import org.jsoup.Jsoup;
 
 /**
@@ -19,20 +19,26 @@ public class URLReader {
     private String jSoup;
     private File file = new File("/home/hiran/sentences.txt");
     private FileWriter fw;
-    private ArrayList<String> urlList = new ArrayList<>();
+    private HashSet<String> urlList = new HashSet<>();
 
     void readURL() throws MalformedURLException, IOException {
         fw = new FileWriter(file, true);
         URLManager uRLManager = new URLManager();
         try {
-            uRLManager.addUrls();
+            //uRLManager.start();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        urlList = uRLManager.getUrls();
-        for (int i = 0; i < urlList.size(); i++) {
-            System.out.println("" + urlList.size());
-            URL oracle = new URL(urlList.get(i));
+        //urlList = uRLManager.getUrls();
+        String[] urls = urlList.toArray(new String[urlList.size()]);
+        for (String item : urls) {
+            System.out.println("" + urls.length);
+            URL oracle = new URL(item);
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException ex) {
+                System.out.println(ex.getMessage());
+            }
             try (BufferedReader in = new BufferedReader(
                     new InputStreamReader(oracle.openStream()))) {
                 String inputLine;
@@ -42,11 +48,9 @@ public class URLReader {
                     if (resultString.length() > 30) {
                         System.out.println(resultString);
                         fw.write(resultString + "\n");
-
                     }
                 }
             }
-
         }
         fw.flush();
         fw.close();
@@ -60,4 +64,5 @@ public class URLReader {
     public static String html2text(String html) {
         return Jsoup.parse(html).text();
     }
+
 }
