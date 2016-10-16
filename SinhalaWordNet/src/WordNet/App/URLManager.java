@@ -18,7 +18,7 @@ public class URLManager extends Thread {
     private ArrayList<String> mainUrls = new ArrayList<>();
     private HashSet<String> urls = new HashSet<>();
 
-    public synchronized void crawl(String url) throws IOException {
+    public void crawl(String url) throws IOException {
 
         Document doc = Jsoup.connect(url).get();
         Elements links = doc.select("a");
@@ -112,7 +112,7 @@ public class URLManager extends Thread {
             try {
                 crawl(mainUrls.get(i));
                 try {
-                    Thread.sleep(500);
+                    Thread.sleep(2000);
                 } catch (InterruptedException ex) {
                     System.out.println(ex.getMessage());
                 }

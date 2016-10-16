@@ -24,7 +24,7 @@ public class SinhalaWordNet {
     public static void main(String[] args) {
         try {
             //        new ReadList().read();
-            new URLReader().readURL();
+            new URLReader().saveUrls();
 //        new ReadModelWords().read();
 //        new ReadModelSentences().read();
 //        new ConnectWordsAndSentences().searchSentence();
