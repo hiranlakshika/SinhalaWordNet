@@ -10,6 +10,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 /**
+ * The type Url manager.
  *
  * @author hiran
  */
@@ -18,6 +19,12 @@ public class URLManager extends Thread {
     private ArrayList<String> mainUrls = new ArrayList<>();
     private HashSet<String> urls = new HashSet<>();
 
+    /**
+     * Crawl.
+     *
+     * @param url the url
+     * @throws IOException the io exception
+     */
     public void crawl(String url) throws IOException {
 
         Document doc = Jsoup.connect(url).get();
@@ -63,7 +70,10 @@ public class URLManager extends Thread {
 //        urls.add("http://www.ada.lk/article/173418/%E0%B6%AF%E0%B7%85%E0%B6%AF%E0%B7%8F-%E0%B6%B8%E0%B7%8F%E0%B6%BD%E0%B7%92%E0%B6%9C%E0%B7%8F%E0%B7%80%E0%B7%9A-%E0%B6%AD%E0%B7%9A%E0%B7%80%E0%B7%8F%E0%B7%80-%E0%B6%85%E0%B7%83%E0%B7%8A%E0%B6%9C%E0%B7%92%E0%B6%BB%E0%B7%92%E0%B6%BA%E0%B6%A7");
 //        return urls;
 //    }
+
     /**
+     * Gets urls.
+     *
      * @return the urls
      */
     public HashSet<String> getUrls() {

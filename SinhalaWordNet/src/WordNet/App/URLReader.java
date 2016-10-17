@@ -17,6 +17,11 @@ public class URLReader {
     private FileWriter fw;
     private HashSet<String> urlList = new HashSet<>();
 
+    /**
+     * Read url.
+     *
+     * @throws IOException the io exception
+     */
     void readURL() throws IOException {
         URLManager uRLManager = new URLManager();
         try {
@@ -55,6 +60,11 @@ public class URLReader {
         fw.close();
     }
 
+    /**
+     * Save urls.
+     *
+     * @throws IOException the io exception
+     */
     void saveUrls() throws IOException {
         URLManager uRLManager = new URLManager();
         try {
