@@ -88,7 +88,7 @@ public class URLReader {
      * @param html
      * @return
      */
-    public static String html2text(String html) {
+    private static String html2text(String html) {
         return Jsoup.parse(html).text();
     }
 

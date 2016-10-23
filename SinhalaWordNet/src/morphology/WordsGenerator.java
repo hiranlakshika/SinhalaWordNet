@@ -82,6 +82,14 @@ public class WordsGenerator {
                 wordArray.forEach(System.out::print);
             }
 
+        } else if (wordArray.size() > 5 && (wordArray.size() > 4 && (wordArray.get(wordArray.size() - 4).toString() + wordArray.get(wordArray.size() - 3).toString() + wordArray.get(wordArray.size() - 2).toString() +
+                wordArray.get(wordArray.size() - 1).toString()).equals("ගේත්"))) {
+            wordArray.remove(wordArray.size() - 1);
+            wordArray.remove(wordArray.size() - 1);
+            wordArray.remove(wordArray.size() - 1);
+            wordArray.remove(wordArray.size() - 1);
+            wordArray.forEach(System.out::print);
+
         } else if (wordArray.size() > 3 && (wordArray.get(wordArray.size() - 2).toString() + wordArray.get(wordArray.size() - 1).toString()).equals("ත්")) {
             if (wordArray.get(wordArray.size() - 3).toString().equals("ෙ")) {
                 wordArray.remove(wordArray.size() - 1);
@@ -109,10 +117,56 @@ public class WordsGenerator {
                 wordArray.remove(wordArray.size() - 1);
                 wordArray.forEach(System.out::print);
             }
+        } else if (wordArray.size() > 4 && (wordArray.get(wordArray.size() - 4).toString() + wordArray.get(wordArray.size() - 3).toString() + wordArray.get(wordArray.size() - 2).toString() + wordArray.get(wordArray.size() - 1).toString()).equals("කින්")) {
+            wordArray.remove(wordArray.size() - 1);
+            wordArray.remove(wordArray.size() - 1);
+            wordArray.remove(wordArray.size() - 1);
+            wordArray.remove(wordArray.size() - 1);
+            wordArray.forEach(System.out::print);
+        } else if (wordArray.size() > 3 && (wordArray.get(wordArray.size() - 2).toString() + wordArray.get(wordArray.size() - 1).toString()).equals("න්")) {
+            if (wordArray.get(wordArray.size() - 3).toString().equals("ෙ")) {
+                wordArray.remove(wordArray.size() - 1);
+                wordArray.remove(wordArray.size() - 1);
+                wordArray.remove(wordArray.size() - 1);
+                wordArray.forEach(System.out::print);
+            } else {
+                wordArray.remove(wordArray.size() - 1);
+                wordArray.remove(wordArray.size() - 1);
+                wordArray.forEach(System.out::print);
+            }
+        } else if (wordArray.size() > 4 && (wordArray.get(wordArray.size() - 2).toString() + wordArray.get(wordArray.size() - 1).toString()).equals("හි")) {
+            if (wordArray.get(wordArray.size() - 3).toString().equals("ෙ")) {
+                wordArray.remove(wordArray.size() - 1);
+                wordArray.remove(wordArray.size() - 1);
+                wordArray.remove(wordArray.size() - 1);
+                wordArray.forEach(System.out::print);
+            } else {
+                wordArray.remove(wordArray.size() - 1);
+                wordArray.remove(wordArray.size() - 1);
+                wordArray.forEach(System.out::print);
+            }
+        } else if (wordArray.size() > 4 && (wordArray.get(wordArray.size() - 2).toString() + wordArray.get(wordArray.size() - 1).toString()).equals("කි") || (wordArray.get(wordArray.size() - 2).toString() +
+                wordArray.get(wordArray.size() - 1).toString()).equals("කු")) {
+            if (wordArray.get(wordArray.size() - 3).toString().equals("ෙ")) {
+                wordArray.remove(wordArray.size() - 1);
+                wordArray.remove(wordArray.size() - 1);
+                wordArray.remove(wordArray.size() - 1);
+                wordArray.add("ා");
+                wordArray.forEach(System.out::print);
+            } else {
+                wordArray.remove(wordArray.size() - 1);
+                wordArray.remove(wordArray.size() - 1);
+                wordArray.forEach(System.out::print);
+            }
+        } else if (wordArray.size() > 5 && (wordArray.get(wordArray.size() - 4).toString() + wordArray.get(wordArray.size() - 3).toString() + wordArray.get(wordArray.size() - 2).toString() + wordArray.get(wordArray.size() - 1).toString()).equals("යෙන්")) {
+            wordArray.remove(wordArray.size() - 1);
+            wordArray.remove(wordArray.size() - 1);
+            wordArray.remove(wordArray.size() - 1);
+            wordArray.forEach(System.out::print);
         } else {
             wordArray.forEach(System.out::print);
-            String s = StringUtils.join(wordArray,"");
-            System.out.println("\n"+s);
+            String s = StringUtils.join(wordArray, "");
+            System.out.println("\n" + s);
         }
     }
 
@@ -134,7 +188,7 @@ public class WordsGenerator {
      */
     public static void main(String[] args) {
         try {
-            String input = "මටමටම";
+            String input = "හයෙන්";
             input = input.replaceAll("[ ]", "");
             generateWord(input);
         } catch (IndexOutOfBoundsException e) {
