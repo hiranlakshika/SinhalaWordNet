@@ -1,6 +1,7 @@
 package WordNet.UI;
 
 import WordNet.Database.DBConnection;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,7 +12,6 @@ import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
  * @author hiran
  */
 public class MainFrame extends javax.swing.JFrame {
@@ -79,12 +79,12 @@ public class MainFrame extends javax.swing.JFrame {
 
         Sentencetable.setFont(new java.awt.Font("Iskoola Pota", 0, 11)); // NOI18N
         Sentencetable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+                new Object[][]{
 
-            },
-            new String [] {
-                "Sentences"
-            }
+                },
+                new String[]{
+                        "Sentences"
+                }
         ));
         jScrollPane2.setViewportView(Sentencetable);
 
@@ -111,39 +111,39 @@ public class MainFrame extends javax.swing.JFrame {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(29, 29, 29)
-                        .addComponent(tfieldWord, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnSearch))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(233, 233, 233)
-                        .addComponent(btnClear)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnExit))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 586, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel1)
+                                                .addGap(29, 29, 29)
+                                                .addComponent(tfieldWord, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(btnSearch))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(233, 233, 233)
+                                                .addComponent(btnClear)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(btnExit))
+                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 586, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(tfieldWord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSearch))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnClear)
-                    .addComponent(btnExit))
-                .addGap(24, 24, 24))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(37, 37, 37)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel1)
+                                        .addComponent(tfieldWord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btnSearch))
+                                .addGap(18, 18, 18)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(btnClear)
+                                        .addComponent(btnExit))
+                                .addGap(24, 24, 24))
         );
 
         pack();
@@ -208,38 +208,8 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         clear();
-        int basewordid = 0;
-        String sql = "Select id From baseword where text = '" + tfieldWord.getText() + "'";
-
-        try {
-            Connection connection = DBConnection.getConnection();
-            Statement stm = connection.createStatement();
-            ResultSet rst = stm.executeQuery(sql);
-            while (rst.next()) {
-
-                basewordid = Integer.parseInt(rst.getString("id"));
-            }
-
-        } catch (SQLException | ClassNotFoundException ex) {
-            System.out.println("" + ex.getMessage());
-        }
-        ArrayList<String> sen_id = new ArrayList<>();
-        sql = "SELECT word_sentence.sentence_id FROM word_sentence INNER JOIN baseword ON word_sentence.word_id=baseword.id where baseword.id=" + basewordid + "";
-        try {
-            Connection connection = DBConnection.getConnection();
-            Statement stm = connection.createStatement();
-            ResultSet rst = stm.executeQuery(sql);
-
-            while (rst.next()) {
-
-                sen_id.add(rst.getString("sentence_id"));
-            }
-
-        } catch (SQLException | ClassNotFoundException ex) {
-            System.out.println("" + ex.getMessage());
-        }
-        for (String x : sen_id) {
-            sql = "Select text From Sentence where id = " + x + "";
+        if (tfieldWord.getText().length() > 1) {
+            String sql = "SELECT * FROM `Sentence` WHERE text like '" + "%" + tfieldWord.getText() + "%" + "'";
 
             try {
                 Connection connection = DBConnection.getConnection();
@@ -254,6 +224,8 @@ public class MainFrame extends javax.swing.JFrame {
             } catch (SQLException | ClassNotFoundException ex) {
                 System.out.println("" + ex.getMessage());
             }
+        } else {
+            JOptionPane.showMessageDialog(this, "Please insert a valid Sinhala word");
         }
 
     }//GEN-LAST:event_btnSearchActionPerformed
