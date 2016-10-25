@@ -1,4 +1,4 @@
-package morphology;
+package WordNet.morphology;
 
 import java.util.ArrayList;
 import java.util.Arrays;

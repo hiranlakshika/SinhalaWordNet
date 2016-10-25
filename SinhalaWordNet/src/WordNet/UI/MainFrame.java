@@ -1,17 +1,18 @@
 package WordNet.UI;
 
 import WordNet.Database.DBConnection;
+import WordNet.morphology.*;
 
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import javax.swing.JOptionPane;
-import javax.swing.UIManager;
-import javax.swing.table.DefaultTableModel;
 
 /**
+ * The type Main frame.
+ *
  * @author hiran
  */
 public class MainFrame extends javax.swing.JFrame {
@@ -24,7 +25,7 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">
     private void initComponents() {
 
         btnExit = new javax.swing.JButton();
@@ -34,6 +35,10 @@ public class MainFrame extends javax.swing.JFrame {
         btnClear = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         Sentencetable = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
+        tfieldBasicForm = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        tfieldWordType = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         mnuFile = new javax.swing.JMenu();
         mnuEdit = new javax.swing.JMenu();
@@ -88,6 +93,22 @@ public class MainFrame extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(Sentencetable);
 
+        jLabel2.setText("Basic Form");
+
+        tfieldBasicForm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfieldBasicFormActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("Type");
+
+        tfieldWordType.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfieldWordTypeActionPerformed(evt);
+            }
+        });
+
         mnuFile.setText("File");
         jMenuBar1.add(mnuFile);
 
@@ -113,21 +134,26 @@ public class MainFrame extends javax.swing.JFrame {
         layout.setHorizontalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
+                                .addContainerGap(37, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel1)
+                                        .addComponent(jLabel2)
+                                        .addComponent(jLabel3))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(tfieldBasicForm, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
+                                        .addComponent(tfieldWordType, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(tfieldWord, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel1)
-                                                .addGap(29, 29, 29)
-                                                .addComponent(tfieldWord, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(btnSearch))
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addGap(233, 233, 233)
-                                                .addComponent(btnClear)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(btnExit))
-                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 586, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                        .addComponent(btnClear)
+                                                        .addGap(18, 18, 18)
+                                                        .addComponent(btnExit))
+                                                .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 586, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(btnSearch))
+                                .addGap(37, 37, 37))
         );
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -137,9 +163,19 @@ public class MainFrame extends javax.swing.JFrame {
                                         .addComponent(jLabel1)
                                         .addComponent(tfieldWord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(btnSearch))
-                                .addGap(18, 18, 18)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
-                                .addGap(18, 18, 18)
+                                .addGap(19, 19, 19)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(jLabel2)
+                                                        .addComponent(tfieldBasicForm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGap(18, 18, 18)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(jLabel3)
+                                                        .addComponent(tfieldWordType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGap(0, 220, Short.MAX_VALUE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(btnClear)
                                         .addComponent(btnExit))
@@ -147,10 +183,10 @@ public class MainFrame extends javax.swing.JFrame {
         );
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+    }// </editor-fold>
 
     /**
-     *
+     * Go.
      */
     public void go() {
         try {
@@ -184,7 +220,7 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     /**
-     *
+     * Clear.
      */
     public void clear() {
         DefaultTableModel dm = (DefaultTableModel) Sentencetable.getModel();
@@ -192,21 +228,21 @@ public class MainFrame extends javax.swing.JFrame {
         dm.fireTableDataChanged();
     }
 
-    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
+    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {
         System.exit(0);
-    }//GEN-LAST:event_btnExitActionPerformed
+    }
 
-    private void mnuAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuAboutActionPerformed
+    private void mnuAboutActionPerformed(java.awt.event.ActionEvent evt) {
         JOptionPane.showMessageDialog(this, "Sinhala WordNet 1.0\nby Hiran Lakshika");
-    }//GEN-LAST:event_mnuAboutActionPerformed
+    }
 
-    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
+    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {
         tfieldWord.setText("");
         //clearTable(Sentencetable);
         clear();
-    }//GEN-LAST:event_btnClearActionPerformed
+    }
 
-    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {
         clear();
         if (tfieldWord.getText().length() > 1) {
             String sql = "SELECT * FROM `Sentence` WHERE text like '" + "%" + tfieldWord.getText() + "%" + "'";
@@ -224,24 +260,36 @@ public class MainFrame extends javax.swing.JFrame {
             } catch (SQLException | ClassNotFoundException ex) {
                 System.out.println("" + ex.getMessage());
             }
+            tfieldWordType.setText(WordTypeChecker.checkWordType(tfieldWord.getText()));
+            tfieldBasicForm.setText(WordsGenerator.generateWord(tfieldWord.getText()));
         } else {
             JOptionPane.showMessageDialog(this, "Please insert a valid Sinhala word");
         }
 
-    }//GEN-LAST:event_btnSearchActionPerformed
+    }
 
-    private void tfieldWordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfieldWordActionPerformed
+    private void tfieldWordActionPerformed(java.awt.event.ActionEvent evt) {
 
-    }//GEN-LAST:event_tfieldWordActionPerformed
+    }
+
+    private void tfieldBasicFormActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+    }
+
+    private void tfieldWordTypeActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+    }
 
     /**
+     * Main.
+     *
      * @param args the command line arguments
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -275,18 +323,22 @@ public class MainFrame extends javax.swing.JFrame {
 
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Variables declaration - do not modify
     private javax.swing.JTable Sentencetable;
     private javax.swing.JButton btnClear;
     private javax.swing.JButton btnExit;
     private javax.swing.JButton btnSearch;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JMenuItem mnuAbout;
     private javax.swing.JMenu mnuEdit;
     private javax.swing.JMenu mnuFile;
     private javax.swing.JMenu mnuHelp;
+    private javax.swing.JTextField tfieldBasicForm;
+    private javax.swing.JTextField tfieldWordType;
     private javax.swing.JTextField tfieldWord;
-    // End of variables declaration//GEN-END:variables
+    // End of variables declaration
 }
