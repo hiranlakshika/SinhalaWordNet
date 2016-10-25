@@ -1,10 +1,16 @@
 package WordNet.UI;
 
 import WordNet.Database.DBConnection;
-import WordNet.morphology.*;
+import WordNet.morphology.WordTypeChecker;
+import WordNet.morphology.WordsGenerator;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.UnsupportedFlavorException;
+import java.awt.event.ActionEvent;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -60,7 +66,13 @@ public class MainFrame extends javax.swing.JFrame {
         btnSearch.setToolTipText("Click here to search");
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSearchActionPerformed(evt);
+                try {
+                    btnSearchActionPerformed(evt);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (UnsupportedFlavorException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -238,11 +250,13 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {
         tfieldWord.setText("");
+        tfieldBasicForm.setText("");
+        tfieldWordType.setText("");
         //clearTable(Sentencetable);
         clear();
     }
 
-    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) throws IOException, UnsupportedFlavorException {
         clear();
         if (tfieldWord.getText().length() > 1) {
             String sql = "SELECT * FROM `Sentence` WHERE text like '" + "%" + tfieldWord.getText() + "%" + "'";
@@ -256,17 +270,18 @@ public class MainFrame extends javax.swing.JFrame {
                     Object[] rowData = {rst.getString("text")};
                     dtm.addRow(rowData);
                 }
-
-            } catch (SQLException | ClassNotFoundException ex) {
+                tfieldWordType.setText(WordTypeChecker.checkWordType(tfieldWord.getText()));
+                tfieldBasicForm.setText(WordsGenerator.generateWord(tfieldWord.getText()));
+            } catch (SQLException | ClassNotFoundException | ArrayIndexOutOfBoundsException ex) {
                 System.out.println("" + ex.getMessage());
             }
-            tfieldWordType.setText(WordTypeChecker.checkWordType(tfieldWord.getText()));
-            tfieldBasicForm.setText(WordsGenerator.generateWord(tfieldWord.getText()));
+
         } else {
             JOptionPane.showMessageDialog(this, "Please insert a valid Sinhala word");
         }
 
     }
+
 
     private void tfieldWordActionPerformed(java.awt.event.ActionEvent evt) {
 
@@ -318,6 +333,20 @@ public class MainFrame extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new MainFrame().setVisible(true);
+                tfieldWord.getInputMap().put(KeyStroke.getKeyStroke("control C"), "preventCopy");
+                tfieldWord.getActionMap().put("preventCopy", new AbstractAction() {
+                    public void actionPerformed(ActionEvent e) {
+                        try {
+                            String clipBoardText = (String) Toolkit.getDefaultToolkit()
+                                    .getSystemClipboard().getData(DataFlavor.stringFlavor);
+                            tfieldWord.setText(clipBoardText);
+                        } catch (UnsupportedFlavorException e1) {
+                            e1.printStackTrace();
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        }
+                    }
+                });
             }
         });
 
@@ -339,6 +368,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JMenu mnuHelp;
     private javax.swing.JTextField tfieldBasicForm;
     private javax.swing.JTextField tfieldWordType;
-    private javax.swing.JTextField tfieldWord;
+    private static javax.swing.JTextField tfieldWord;
     // End of variables declaration
 }

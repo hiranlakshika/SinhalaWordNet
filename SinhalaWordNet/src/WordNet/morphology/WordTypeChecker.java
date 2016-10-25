@@ -13,9 +13,9 @@ public class WordTypeChecker {
         List<String> wordArray = new ArrayList<>(Arrays.asList(word.split("")));
         if (wordArray.size() > 1) {
             if ((wordArray.get(wordArray.size() - 3).toString() + wordArray.get(wordArray.size() - 2).toString() + wordArray.get(wordArray.size() - 1).toString()).equals("නවා")) {
-                word = "verb";
+                word = "ක්\u200Dරියායාපදයකි";
             } else {
-                word = "noun";
+                word = "නාමපදයකි";
             }
         }
         return word;
