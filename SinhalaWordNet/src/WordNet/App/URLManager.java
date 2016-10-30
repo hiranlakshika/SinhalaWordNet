@@ -16,7 +16,13 @@ import org.jsoup.select.Elements;
  */
 public class URLManager extends Thread {
 
+    /**
+     * The Main urls.
+     */
     private ArrayList<String> mainUrls = new ArrayList<>();
+    /**
+     * The Urls.
+     */
     private HashSet<String> urls = new HashSet<>();
 
     /**
@@ -50,6 +56,9 @@ public class URLManager extends Thread {
         return urls;
     }
 
+    /**
+     * Add main urls.
+     */
     private void addMainUrls() {
         mainUrls.add("http://www.ada.lk");
         mainUrls.add("http://www.lankadeepa.lk");

@@ -6,14 +6,18 @@ import WorNet.Sample.ReadModelSentences;
 import WorNet.Sample.ReadModelWords;
 import WorNet.Sample.WordandSentence;
 import WordNet.UI.MainFrame;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.UnsupportedFlavorException;
+import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
  * @author hiran
  */
 public class SinhalaWordNet {
@@ -32,8 +36,8 @@ public class SinhalaWordNet {
 //        new ConnectWordsAndSentences().selectAllSentences();
 //        new WordandSentence().setDB();
 //        new ConnectWordsAndSentences().modelSearch();
-//        MainFrame f;
-//        f = new MainFrame();
+//            MainFrame f;
+//            f = new MainFrame();
 //
 //        ClipBoardListener clipBoardGrabber = new ClipBoardListener();
 //        try {
@@ -41,10 +45,13 @@ public class SinhalaWordNet {
 //        } catch (UnsupportedFlavorException | IOException ex) {
 //            System.out.println(ex.getMessage());
 //        }
-//        f.go();
+//            f.go();
+
 //        //f.setVisible(true);
         } catch (IOException ex) {
             System.out.println("" + ex.getMessage());
+        } finally {
+
         }
     }
 

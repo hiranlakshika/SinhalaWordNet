@@ -1,6 +1,7 @@
 package WordNet.App;
 
 import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 
 
 import java.io.*;
@@ -8,13 +9,27 @@ import java.net.URL;
 import java.util.HashSet;
 
 /**
+ * The type Url reader.
+ *
  * @author hiran
  */
 public class URLReader {
 
+    /**
+     * The J soup.
+     */
     private String jSoup;
+    /**
+     * The File.
+     */
     private File file;
+    /**
+     * The Fw.
+     */
     private FileWriter fw;
+    /**
+     * The Url list.
+     */
     private HashSet<String> urlList = new HashSet<>();
 
     /**
@@ -36,24 +51,60 @@ public class URLReader {
         for (String urls : urlList) {
             System.out.println("" + urlList.size());
             if (!urls.contains("rainbowpages")) {
-                URL oracle = new URL(urls);
+                URL oracle =null;
+                if (urls.contains("html")){
+                     oracle = new URL(urls);
+                }
                 try {
                     Thread.sleep(5000);
                 } catch (InterruptedException ex) {
                     System.out.println(ex.getMessage());
                 }
-                try (BufferedReader in = new BufferedReader(
-                        new InputStreamReader(oracle.openStream()))) {
-                    String inputLine;
-                    while ((inputLine = in.readLine()) != null) {
-                        jSoup = html2text(inputLine);
-                        String resultString = jSoup.replaceAll("[a-zA-Z0-9\\[\\]$&+,\";<©>‘`^{_}*↑#@?/=:'|\\\\()%!-]", "");
-                        if (resultString.length() > 30) {
-                            System.out.println(resultString);
-                            fw.write(resultString + "\n");
-                        }
-                    }
-                }
+              if (oracle!=null){
+                  try (BufferedReader in = new BufferedReader(
+                          new InputStreamReader(oracle.openStream()))) {
+                      String inputLine;
+                      while ((inputLine = in.readLine()) != null) {
+                          jSoup = html2text(inputLine);
+                          String resultString = jSoup.replaceAll("[a-zA-Z0-9\\[\\]$&+,\";<©>‘`^{_}*↑#@?/=:'|\\\\()%!-]", "");
+                          if (resultString.length() > 30) {
+                              System.out.println(resultString);
+                              fw.write(resultString + "\n");
+                          }
+                      }
+                  }
+              }
+            }
+        }
+        fw.flush();
+        fw.close();
+    }
+
+    void readUrlWithJsoup() throws IOException {
+        URLManager uRLManager = new URLManager();
+        try {
+            uRLManager.start();
+            uRLManager.join();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        file = new File("/home/hiran/sentences.txt");
+        fw = new FileWriter(file, true);
+        urlList = uRLManager.getUrls();
+
+        for (String urls : urlList) {
+            System.out.println("" + urlList.size());
+            Document doc = Jsoup.connect(urls).get();
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException ex) {
+                System.out.println(ex.getMessage());
+            }
+            jSoup = html2text(doc.toString());
+            String resultString = jSoup.replaceAll("[a-zA-Z0-9\\[\\]$&+,\";<©>‘`^{_}*↑#@?/=:'|\\\\()%!-]", "");
+            if (resultString.length() > 30) {
+                System.out.println(resultString);
+                fw.write(resultString + "\n");
             }
         }
         fw.flush();
@@ -85,8 +136,10 @@ public class URLReader {
     }
 
     /**
-     * @param html
-     * @return
+     * Html 2 text string.
+     *
+     * @param html the html
+     * @return string
      */
     private static String html2text(String html) {
         return Jsoup.parse(html).text();

@@ -226,7 +226,20 @@ public class MainFrame extends javax.swing.JFrame {
                 MainFrame f = new MainFrame();
                 f.setLocationRelativeTo(null);
                 f.setVisible(true);
-
+                tfieldWord.getInputMap().put(KeyStroke.getKeyStroke("control C"), "preventCopy");
+                tfieldWord.getActionMap().put("preventCopy", new AbstractAction() {
+                    public void actionPerformed(ActionEvent e) {
+                        try {
+                            String clipBoardText = (String) Toolkit.getDefaultToolkit()
+                                    .getSystemClipboard().getData(DataFlavor.stringFlavor);
+                            tfieldWord.setText(clipBoardText);
+                        } catch (UnsupportedFlavorException e1) {
+                            e1.printStackTrace();
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        }
+                    }
+                });
             }
         });
     }
@@ -333,20 +346,6 @@ public class MainFrame extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new MainFrame().setVisible(true);
-                tfieldWord.getInputMap().put(KeyStroke.getKeyStroke("control C"), "preventCopy");
-                tfieldWord.getActionMap().put("preventCopy", new AbstractAction() {
-                    public void actionPerformed(ActionEvent e) {
-                        try {
-                            String clipBoardText = (String) Toolkit.getDefaultToolkit()
-                                    .getSystemClipboard().getData(DataFlavor.stringFlavor);
-                            tfieldWord.setText(clipBoardText);
-                        } catch (UnsupportedFlavorException e1) {
-                            e1.printStackTrace();
-                        } catch (IOException e1) {
-                            e1.printStackTrace();
-                        }
-                    }
-                });
             }
         });
 
