@@ -48,32 +48,27 @@ public class URLReader {
         file = new File("/home/hiran/sentences.txt");
         fw = new FileWriter(file, true);
         urlList = uRLManager.getUrls();
+        System.out.println("" + urlList.size());
         for (String urls : urlList) {
-            System.out.println("" + urlList.size());
-            if (!urls.contains("rainbowpages")) {
-                URL oracle =null;
-                if (urls.contains("html")){
-                     oracle = new URL(urls);
+            URL oracle = new URL(urls);
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException ex) {
+                System.out.println(ex.getMessage());
+            }
+            try (BufferedReader in = new BufferedReader(
+                    new InputStreamReader(oracle.openStream()))) {
+                String inputLine;
+                while ((inputLine = in.readLine()) != null) {
+                    jSoup = html2text(inputLine);
+                    String resultString = jSoup.replaceAll("[a-zA-Z0-9\\[\\]$&+,\";<©>‘`^{_}*↑#@?/=:'|\\\\()%!-]", "");
+                    if (resultString.length() > 30) {
+                        System.out.println(resultString);
+                        fw.write(resultString + "\n");
+                    }
                 }
-                try {
-                    Thread.sleep(5000);
-                } catch (InterruptedException ex) {
-                    System.out.println(ex.getMessage());
-                }
-              if (oracle!=null){
-                  try (BufferedReader in = new BufferedReader(
-                          new InputStreamReader(oracle.openStream()))) {
-                      String inputLine;
-                      while ((inputLine = in.readLine()) != null) {
-                          jSoup = html2text(inputLine);
-                          String resultString = jSoup.replaceAll("[a-zA-Z0-9\\[\\]$&+,\";<©>‘`^{_}*↑#@?/=:'|\\\\()%!-]", "");
-                          if (resultString.length() > 30) {
-                              System.out.println(resultString);
-                              fw.write(resultString + "\n");
-                          }
-                      }
-                  }
-              }
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
             }
         }
         fw.flush();
