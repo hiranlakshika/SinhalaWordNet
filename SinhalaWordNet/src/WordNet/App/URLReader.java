@@ -48,6 +48,7 @@ public class URLReader {
         file = new File("/home/hiran/sentences.txt");
         fw = new FileWriter(file, true);
         urlList = uRLManager.getUrls();
+        int count = 0;
         System.out.println("" + urlList.size());
         for (String urls : urlList) {
             URL oracle = new URL(urls);
@@ -61,8 +62,9 @@ public class URLReader {
                 String inputLine;
                 while ((inputLine = in.readLine()) != null) {
                     jSoup = html2text(inputLine);
-                    String resultString = jSoup.replaceAll("[a-zA-Z0-9\\[\\]$&+,\";<©>‘`^{_}*↑#@?/=:'|\\\\()%!-]", "");
+                    String resultString = jSoup.replaceAll("[a-zA-Z0-9\\[\\]$&+,\";<©>‘`^{_}*↑෴#@?/=:'|\\\\()%!-]", "");
                     if (resultString.length() > 30) {
+                        System.out.println("Lines " + count++);
                         System.out.println(resultString);
                         fw.write(resultString + "\n");
                     }
@@ -75,8 +77,14 @@ public class URLReader {
         fw.close();
     }
 
+    /**
+     * Read url with jsoup.
+     *
+     * @throws IOException the io exception
+     */
     void readUrlWithJsoup() throws IOException {
         URLManager uRLManager = new URLManager();
+        int count = 0;
         try {
             uRLManager.start();
             uRLManager.join();
@@ -86,20 +94,28 @@ public class URLReader {
         file = new File("/home/hiran/sentences.txt");
         fw = new FileWriter(file, true);
         urlList = uRLManager.getUrls();
-
+        System.out.println("" + urlList.size());
         for (String urls : urlList) {
-            System.out.println("" + urlList.size());
             Document doc = Jsoup.connect(urls).get();
             try {
                 Thread.sleep(5000);
             } catch (InterruptedException ex) {
                 System.out.println(ex.getMessage());
             }
-            jSoup = html2text(doc.toString());
-            String resultString = jSoup.replaceAll("[a-zA-Z0-9\\[\\]$&+,\";<©>‘`^{_}*↑#@?/=:'|\\\\()%!-]", "");
-            if (resultString.length() > 30) {
-                System.out.println(resultString);
-                fw.write(resultString + "\n");
+            try (BufferedReader bufReader = new BufferedReader(new StringReader(doc.toString()))) {
+                String textOutput;
+                while ((textOutput = bufReader.readLine()) != null) {
+                    jSoup = html2text(textOutput);
+                    String resultString = jSoup.replaceAll("[a-zA-Z0-9\\[\\]$&+,\";<©>‘`^{_}*↑#@?/=:'|\\\\()%!-]", "");
+                    if (resultString.length() > 30) {
+                        System.out.println("Lines " + count++);
+                        System.out.println(resultString);
+                        fw.write(resultString + "\n");
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+
             }
         }
         fw.flush();
@@ -134,7 +150,7 @@ public class URLReader {
      * Html 2 text string.
      *
      * @param html the html
-     * @return string
+     * @return string string
      */
     private static String html2text(String html) {
         return Jsoup.parse(html).text();

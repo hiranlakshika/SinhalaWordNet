@@ -41,7 +41,9 @@ public class URLManager extends Thread {
 
             if (Patterns.WEB_URL.matcher(foundUrl).matches()) {
                 System.out.println(foundUrl);
-                urls.add(foundUrl);
+                if (!foundUrl.contains(".pdf") || !foundUrl.contains(".jpg") || !foundUrl.contains(".png") || !foundUrl.contains(".jpeg")){
+                    urls.add(foundUrl);
+                }
             }
         }
     }

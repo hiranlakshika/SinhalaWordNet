@@ -20,7 +20,7 @@ public class DBConnection {
     public static Connection getConnection() throws ClassNotFoundException, SQLException {
         if (connection == null) {
             Class.forName("com.mysql.jdbc.Driver");
-            String url = "jdbc:mysql://localhost/WordNetModel?useUnicode=true&characterEncoding=UTF-8";
+            String url = "jdbc:mysql://localhost/SinhalaWordNet?useUnicode=true&characterEncoding=UTF-8";
             connection = DriverManager.getConnection(url, "root", "");
         }
         return connection;

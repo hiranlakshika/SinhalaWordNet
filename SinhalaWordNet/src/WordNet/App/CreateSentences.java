@@ -1,37 +1,27 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package WordNet.App;
 
 import java.io.*;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
 
 /**
  * @author hiran
  */
 public class CreateSentences extends Thread {
 
-    private File file = new File("/home/hiran/sentences.txt");
-    private ArrayList<String[]> sentences = new ArrayList<>();
+    private File file = new File("/home/hiran/output.txt");
     private FileReader fr;
     private BufferedReader br;
+    String[] sentences;
 
     void createSentence() throws FileNotFoundException, IOException {
         fr = new FileReader(file);
         br = new BufferedReader(fr);
         String data = br.readLine();
         while (data != null) {
-//            if (data.contains(".")) {
-//                sentences.add(data.split("."));
-//            } else {
-                sentences.add(data.split("\\r?\\n"));
-//            }
+            if (data.contains(".")) {
+                sentences = data.split("\\.");
+            } else {
+                sentences = data.split("\\r?\\n");
+            }
             data = br.readLine();
         }
         fr.close();
@@ -39,9 +29,10 @@ public class CreateSentences extends Thread {
     }
 
     void print() {
-        System.out.println(sentences.size());
-        for (String[] s:sentences) {
-            System.out.println(s[1]);
+        System.out.println(sentences.length);
+        for (String s : sentences
+                ) {
+            System.out.println(s);
         }
     }
 
@@ -55,16 +46,16 @@ public class CreateSentences extends Thread {
         }
     }
 
-    void aVoid() {
+    /*void aVoid() {
         String folderPath = "/home/hiran/";
-        Path path = Paths.get(folderPath, "sentences.txt"); //or any text file eg.: txt, bat, etc
+        Path path = Paths.get(folderPath, "output.txt"); //or any text file eg.: txt, bat, etc
         Charset charset = Charset.forName("UTF-8");
         String line;
         try (BufferedReader reader = Files.newBufferedReader(path, charset)) {
             while ((line = reader.readLine()) != null) {
                 //separate all csv fields into string array
                 if (line.contains(".")) {
-                    sentences.add(line.split("."));
+                    sentences.add(line.split("\\."));
                 } else {
                     sentences.add(line.split("\\r?\\n"));
                 }
@@ -74,11 +65,26 @@ public class CreateSentences extends Thread {
         }
     }
 
+    void scannerMethod() throws FileNotFoundException {
+        Scanner s = new Scanner(new File("/home/hiran/output.txt"));
+        while (s.hasNextLine()) {
+            list.add(s.nextLine());
+        }
+        s.close();
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).contains(".")) {
+                sentences.add((list.get(i).split("\\.")));
+            } else {
+                sentences.add((list.get(i).split("\\r?\\n")));
+            }
+        }
+    }*/
+
     public static void main(String[] args) {
         CreateSentences createSentences = new CreateSentences();
         createSentences.start();
         try {
-            Thread.sleep(5000);
+            Thread.sleep(10000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

@@ -93,7 +93,7 @@ public class MainFrame extends javax.swing.JFrame {
                 btnClearActionPerformed(evt);
             }
         });
-
+        jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
         Sentencetable.setFont(new java.awt.Font("Iskoola Pota", 0, 11)); // NOI18N
         Sentencetable.setModel(new javax.swing.table.DefaultTableModel(
                 new Object[][]{
@@ -272,7 +272,7 @@ public class MainFrame extends javax.swing.JFrame {
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) throws IOException, UnsupportedFlavorException {
         clear();
         if (tfieldWord.getText().length() > 1) {
-            String sql = "SELECT * FROM `Sentence` WHERE text like '" + "%" + tfieldWord.getText() + "%" + "'";
+            String sql = "SELECT * FROM `sentence` WHERE text like '" + "%" + tfieldWord.getText() + "%" + "'";
 
             try {
                 Connection connection = DBConnection.getConnection();
