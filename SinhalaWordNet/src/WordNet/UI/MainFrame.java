@@ -94,6 +94,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+        Sentencetable.setPreferredScrollableViewportSize(Toolkit.getDefaultToolkit().getScreenSize());
         Sentencetable.setFont(new java.awt.Font("Iskoola Pota", 0, 11)); // NOI18N
         Sentencetable.setModel(new javax.swing.table.DefaultTableModel(
                 new Object[][]{
